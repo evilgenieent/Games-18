@@ -1,0 +1,6 @@
+2014-03-20	Stats:
+			Removed ng-grid
+		Admin:
+			Added color to new additions
+			Added game list
+		
