@@ -2,16 +2,17 @@
 <html ng-app="scoreApp">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=yes">
 	<title>Stats</title>
 
 	<!-- these three are jquery mandatory -->
 	<script type="text/javascript" src="includes/libs/jquery-1.10.2.min.js"></script>
 
 	<!-- these two are wui mandatory -->
-	<link rel="stylesheet" type="text/css" href="includes/libs/bootstrap.min.css" /> 
+	<link rel="stylesheet" type="text/css" href="includes/libs/bootstrap.css" /> 
 
 	<!-- angularjs -->
-	<script type="text/javascript" src="includes/libs/angular.min.js"></script> 
+	<script type="text/javascript" src="includes/libs/angular.js"></script> 
 	<script type="text/javascript" src="includes/libs/bindonce.js"></script> 
 
 	<script type="text/javascript" src="includes/libs/ui-bootstrap-tpls-0.9.0.min.js"></script>
@@ -23,19 +24,59 @@
 	<script src="includes/menucontroller.js"></script>
 
 	<style type="text/css">
-		 .gridStyle {
-			border: 1px solid rgb(212,212,212);
-			width: 99%; 
-			height: 500px;
-		}
 		.evenrowclass tr:nth-child(even) {
 			background-color: rgb(240,240,240);
 		}
-		.input-mini { width: 40px; }
-		.input-mini2 { width: 60px; }
-		.input-small { width: 90px; }
-		.input-medium { width: 120px; }
-		table.inner { width: 100%; }
+		.input-mini { width: 4%; }
+		.input-mini2 { width: 7%;  }
+		.input-small2 { width: 5%; }
+		.input-small3 { width: 6%; }
+		.input-small { width: 7%; }
+		.input-medium { width: 10%;  }
+		.input-box { width: 95%;  }
+		table.inner { width: 100%;}
+
+		@media (min-width: 960px) {
+			.input-mini,
+			.input-mini2,
+			.input-small,
+			.input-small2,
+			.input-small3,
+			.input-medium,
+			.lowpadding {
+				padding-left: 2px !important;
+				padding-right: 2px !important;
+				padding-top: 1px !important;
+				padding-bottom: 1px !important;
+				font-size: 15px;
+			}
+
+			.extrasmall {
+				font-size: 12px;
+				padding-left: 1px !important;
+			}
+		}
+		@media (max-width: 959px) {
+			.input-mini,
+			.input-mini2,
+			.input-small,
+			.input-small2,
+			.input-small3,
+			.input-medium,
+			.lowpadding {
+				padding-left: 2px !important;
+				padding-right: 2px !important;
+				padding-top: 1px !important;
+				padding-bottom: 1px !important;
+				font-size: 8px;
+			}
+
+			.extrasmall {
+				font-size: 7px;
+				padding-left: 1px !important;
+			}
+		}
+
 	</style>
 </head>
 
@@ -53,72 +94,46 @@
 	<div ng-controller="scoreController">
 		<tabset>
 			<tab heading="Games">
-				<div id="gamesHeader" style="overflow-y: scroll;">
-					<table id="resulttable" class="table table-bordered" style="table-layout:fixed">
+				<div id="gamesHeader">
+					<table id="resulttable" class="table table-bordered table-condensed" style="table-layout:fixed; margin-bottom: 0px;">
 						<thead>
 							<tr>
-								<th class="input-small">Season</th>
+								<th class="input-small3">Season</th>
 								<th class="input-small">Date</th>
-								<th class="input-small">Host</th>
+								<th class="input-small3">Host</th>
 								<th class="input-medium">Game</th>
-								<th class="input-mini">Daniel</th>
-								<th class="input-mini">Johan</th>
-								<th class="input-mini">Marcus</th>
-								<th class="input-mini">Mattias</th>
-								<th class="input-mini">Stefan</th>
+								<th class="input-mini extrasmall">Daniel</th>
+								<th class="input-mini extrasmall">Johan</th>
+								<th class="input-mini extrasmall">Marcus</th>
+								<th class="input-mini extrasmall">Mattias</th>
+								<th class="input-mini extrasmall">Stefan</th>
 							</tr>
 							<tr>
-								<td class="input-small"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.season" class="input-small" /></form></td>
-								<td class="input-small"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.date" class="input-small"/></form></td>
-								<td class="input-small"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.host" class="input-small"/></form></td>
-								<td class="input-medium"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.game" class="input-medium"/></form></td>
-								<td class="input-mini"></td>
-								<td class="input-mini"></td>
-								<td class="input-mini"></td>
-								<td class="input-mini"></td>
-								<td class="input-mini"></td>
+								<td class="input-small3"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.season" class="input-box" /></form></td>
+								<td class="input-small"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.date" class="input-box"/></form></td>
+								<td class="input-small3"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.host" class="input-box"/></form></td>
+								<td class="input-medium"><form ng-submit="applyFilter()"><input type="text" placeholder="Filter..." ng-model="gameFilter.game" class="input-box"/></form></td>
+								<td class="input-mini">{{averages[0] | number:2}}</td>
+								<td class="input-mini">{{averages[1] | number:2}}</td>
+								<td class="input-mini">{{averages[2] | number:2}}</td>
+								<td class="input-mini">{{averages[3] | number:2}}</td>
+								<td class="input-mini">{{averages[4] | number:2}}</td>
 							</tr>
 						</thead>
 					</table>
 				</div>
-				<div id ="gamesList" style="overflow-y: scroll;" resize padding="280">
-					<table id="resulttable2" class="table table-bordered" style="table-layout:fixed">
-						<tr ng-class-even="{'evenrow': true}" ng-repeat="game in filteredItems">
-							<td class="input-small">{{game.season}}</td>
+				<div id ="gamesList">
+					<table id="resulttable2" class="table table-bordered table-condensed" style="table-layout:fixed; margin-bottom: 0px;">
+						<tr ng-class-even="{'evenrow': true}" ng-repeat="game in filteredItems" >
+							<td class="input-small3">{{game.season}}</td>
 							<td class="input-small">{{game.date}}</td>
-							<td class="input-small">{{game.host}}</td>
+							<td class="input-small3">{{game.host}}</td>
 							<td class="input-medium">{{game.game}}</td>
-							<td class="input-mini">{{game.points[0] | number:2}}</td>
-							<td class="input-mini">{{game.points[1] | number:2}}</td>
-							<td class="input-mini">{{game.points[2] | number:2}}</td>
-							<td class="input-mini">{{game.points[3] | number:2}}</td>
-							<td class="input-mini">{{game.points[4] | number:2}}</td>
-						</tr>
-					</table>
-				</div>
-				<div id ="avg" style="overflow-y: scroll;">
-					<table id="avgtable" class="table table-bordered" style="table-layout:fixed; border-top:thick double #000000;">
-						<tr>
-							<td class="input-small"></td>
-							<td class="input-small"></td>
-							<td class="input-small"></td>
-							<td class="input-medium">Total:</td>
-							<td class="input-mini">{{totals[0] | number:2}}</td>
-							<td class="input-mini">{{totals[1] | number:2}}</td>
-							<td class="input-mini">{{totals[2] | number:2}}</td>
-							<td class="input-mini">{{totals[3] | number:2}}</td>
-							<td class="input-mini">{{totals[4] | number:2}}</td>
-						</tr>
-						<tr>
-							<td class="input-small"></td>
-							<td class="input-small"></td>
-							<td class="input-small"></td>
-							<td class="input-medium">Average:</td>
-							<td class="input-mini">{{averages[0] | number:2}}</td>
-							<td class="input-mini">{{averages[1] | number:2}}</td>
-							<td class="input-mini">{{averages[2] | number:2}}</td>
-							<td class="input-mini">{{averages[3] | number:2}}</td>
-							<td class="input-mini">{{averages[4] | number:2}}</td>
+							<td class="input-mini">{{game.points[0] | number}}</td>
+							<td class="input-mini">{{game.points[1] | number}}</td>
+							<td class="input-mini">{{game.points[2] | number}}</td>
+							<td class="input-mini">{{game.points[3] | number}}</td>
+							<td class="input-mini">{{game.points[4] | number}}</td>
 						</tr>
 					</table>
 				</div>
